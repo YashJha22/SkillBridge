@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -25,12 +25,16 @@ fun SocialLogoButton(
         modifier = modifier
             .size(52.dp)
             .clip(CircleShape)
-            .background(Color.White)
-            .border(1.dp, Color.LightGray, CircleShape)
+            .background(MaterialTheme.colorScheme.surface)
+            .border(
+                width =1.dp,
+                color = MaterialTheme.colorScheme.outline,
+                shape = CircleShape)
     ) {
         Icon(
             painter = painterResource(id = icon),
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            tint = MaterialTheme.colorScheme.onSurface
         )
     }
 }

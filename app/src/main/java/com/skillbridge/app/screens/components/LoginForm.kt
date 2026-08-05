@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment  // ← ADD THIS
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -26,33 +26,31 @@ fun LoginForm(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        // Email Field
+
         SkillBridgeTextField(
             value = email,
             onValueChange = { email = it },
             label = "Email",
-            placeholder = "Enter your email"
+            placeholder = "you@example.com"
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-        // Password Field
         SkillBridgeTextField(
             value = password,
             onValueChange = { password = it },
             label = "Password",
-            placeholder = "Enter your password"
+            placeholder = "••••••••"
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Forgot Password
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(
-                onClick = { /* TODO: Forgot Password */ }
+                onClick = { }
             ) {
                 Text(
                     text = "Forgot Password?",
@@ -61,38 +59,41 @@ fun LoginForm(
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Login Button
         Button(
-            onClick = { /* TODO: Handle Login */ },
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .height(56.dp),
+            shape = MaterialTheme.shapes.medium
         ) {
-            Text("Login")
+            Text(
+                text = "Login",
+                style = MaterialTheme.typography.titleMedium
+            )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // OR Divider
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Divider(
+
+            HorizontalDivider(
                 modifier = Modifier.weight(1f),
                 thickness = 1.dp,
                 color = MaterialTheme.colorScheme.outline
             )
 
             Text(
-                text = "  OR  ",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium
+                text = " OR ",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier.weight(1f),
                 thickness = 1.dp,
                 color = MaterialTheme.colorScheme.outline
@@ -101,11 +102,10 @@ fun LoginForm(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Social Login Section
-        SocialLoginSection( )
+        SocialLoginSection()
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+
         AuthFooter()
-
     }
 }
