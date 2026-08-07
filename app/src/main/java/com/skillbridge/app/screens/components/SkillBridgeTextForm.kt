@@ -19,6 +19,7 @@ fun SkillBridgeTextField(
     onValueChange: (String) -> Unit,
     label: String,
     placeholder: String = "",
+    error: String? = null,
     singleLine: Boolean = true,
     modifier: Modifier = Modifier
 ) {
@@ -63,5 +64,14 @@ fun SkillBridgeTextField(
             thickness = 1.dp,
             color = MaterialTheme.colorScheme.outline
         )
+
+        if (error != null) {
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text= error,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
     }
 }

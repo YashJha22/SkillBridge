@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.skillbridge.app.screens.LoginScreen
+import com.skillbridge.app.navigation.AppNavigation
 import com.skillbridge.app.ui.theme.SkillBridgeTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SkillBridgeTheme {
-                LoginScreen()
+                AppNavigation()
             }
         }
     }

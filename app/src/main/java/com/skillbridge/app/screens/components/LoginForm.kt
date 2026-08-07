@@ -11,36 +11,42 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoginForm(
+    email: String,
+    password: String,
+    emailError: String?,
+    passwordError: String?,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onLoginClick: ()-> Unit,
     modifier: Modifier = Modifier
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
 
         SkillBridgeTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = onEmailChange,
             label = "Email",
-            placeholder = "you@example.com"
+            placeholder = "you@example.com",
+            error = emailError
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         SkillBridgeTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = onPasswordChange,
             label = "Password",
-            placeholder = "••••••••"
+            placeholder = "••••••••",
+            error = passwordError
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -62,7 +68,7 @@ fun LoginForm(
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = { },
+            onClick = onLoginClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
