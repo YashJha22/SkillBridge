@@ -24,8 +24,8 @@ fun LoginForm(
     passwordError: String?,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onLoginClick: ()-> Unit,
-    onSignUpClick: ()-> Unit,
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -40,17 +40,22 @@ fun LoginForm(
             error = emailError
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         SkillBridgeTextField(
             value = password,
             onValueChange = onPasswordChange,
             label = "Password",
             placeholder = "••••••••",
-            error = passwordError
+            error = passwordError,
+            isPassword = true
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -66,7 +71,9 @@ fun LoginForm(
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
 
         Button(
             onClick = onLoginClick,
@@ -81,7 +88,9 @@ fun LoginForm(
             )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -107,14 +116,18 @@ fun LoginForm(
             )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         SocialLoginSection()
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
 
         AuthFooter(
-            onSignUpClick = onSignUpClick
+            onClick = onSignUpClick
         )
     }
 }

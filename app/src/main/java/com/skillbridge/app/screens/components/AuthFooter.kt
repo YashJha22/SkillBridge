@@ -1,6 +1,5 @@
 package com.skillbridge.app.screens.components
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +12,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun AuthFooter(
-    onSignUpClick: () -> Unit,
+    isSignup: Boolean = false,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -21,16 +21,25 @@ fun AuthFooter(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         Text(
-            text = "Don't have an account?",
+            text = if (isSignup) {
+                "Already have an account?"
+            } else {
+                "Don't have an account?"
+            },
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         TextButton(
-            onClick = onSignUpClick
+            onClick = onClick
         ) {
             Text(
-                text = "Sign Up",
+                text = if (isSignup) {
+                    "Login"
+                } else {
+                    "Sign Up"
+                },
                 color = MaterialTheme.colorScheme.primary
             )
         }
