@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -21,6 +23,7 @@ fun SkillBridgeTextField(
     placeholder: String = "",
     error: String? = null,
     singleLine: Boolean = true,
+    isPassword: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -44,6 +47,11 @@ fun SkillBridgeTextField(
                 color = MaterialTheme.colorScheme.onBackground
             ),
             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+            visualTransformation = if (isPassword){
+                PasswordVisualTransformation()
+            } else {
+                VisualTransformation.None
+            },
             decorationBox = { innerTextField ->
 
                 if (value.isEmpty()) {

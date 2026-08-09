@@ -25,6 +25,7 @@ fun LoginForm(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onLoginClick: ()-> Unit,
+    onSignUpClick: ()-> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -112,6 +113,8 @@ fun LoginForm(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        AuthFooter()
+        AuthFooter(
+            onSignUpClick = onSignUpClick
+        )
     }
 }

@@ -14,13 +14,15 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun WelcomeSection(
+    title: String,
+    subtitle: String,
     modifier: Modifier = Modifier
 ){
     Column(
         modifier = modifier
     ){
         Text(
-            text ="Welcome Back!",
+            text =title,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
@@ -29,7 +31,7 @@ fun WelcomeSection(
         Spacer(modifier= Modifier.height(4.dp))
 
         Text(
-            text ="Login to continue your journey",
+            text =subtitle,
             fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant ,
             modifier = Modifier.fillMaxWidth()

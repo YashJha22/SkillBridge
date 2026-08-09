@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun AuthFooter(
+    onSignUpClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -26,7 +27,7 @@ fun AuthFooter(
         )
 
         TextButton(
-            onClick = { /* TODO: Navigate to Sign Up */ }
+            onClick = onSignUpClick
         ) {
             Text(
                 text = "Sign Up",
