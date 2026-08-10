@@ -111,7 +111,7 @@ fun SignupScreen() {
         )
 
         Button(
-            onClick = zviewModel::onCreateAccountClick,
+            onClick = viewModel::onCreateAccountClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
