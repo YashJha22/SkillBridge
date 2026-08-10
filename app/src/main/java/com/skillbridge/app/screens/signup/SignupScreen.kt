@@ -21,14 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.skillbridge.app.screens.components.AuthFooter
 import com.skillbridge.app.screens.components.LogoSection
 import com.skillbridge.app.screens.components.SkillBridgeTextField
 import com.skillbridge.app.screens.components.SocialLoginSection
 import com.skillbridge.app.screens.components.WelcomeSection
-import com.skillbridge.app.screens.components.AuthFooter
 
 @Composable
-fun SignupScreen() {
+fun SignupScreen(
+    onBackToLoginClick: () -> Unit
+) {
+
     val viewModel: SignupViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
 
@@ -47,7 +50,7 @@ fun SignupScreen() {
         LogoSection()
 
         Spacer(
-            modifier = Modifier.height(32.dp)
+            modifier = Modifier.height(36.dp)
         )
 
         WelcomeSection(
@@ -56,7 +59,7 @@ fun SignupScreen() {
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(28.dp)
         )
 
         SkillBridgeTextField(
@@ -68,24 +71,24 @@ fun SignupScreen() {
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(20.dp)
         )
 
         SkillBridgeTextField(
             value = uiState.email,
-            onValueChange = viewModel::onEmailChange ,
+            onValueChange = viewModel::onEmailChange,
             label = "Email",
             placeholder = "you@example.com",
             error = uiState.emailError
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(20.dp)
         )
 
         SkillBridgeTextField(
             value = uiState.password,
-            onValueChange =viewModel::onPasswordChange,
+            onValueChange = viewModel::onPasswordChange,
             label = "Password",
             placeholder = "••••••••",
             isPassword = true,
@@ -93,13 +96,12 @@ fun SignupScreen() {
         )
 
         Spacer(
-
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(20.dp)
         )
 
         SkillBridgeTextField(
             value = uiState.confirmPassword,
-            onValueChange =viewModel::onConfirmPasswordChange,
+            onValueChange = viewModel::onConfirmPasswordChange,
             label = "Confirm Password",
             placeholder = "••••••••",
             isPassword = true,
@@ -107,7 +109,7 @@ fun SignupScreen() {
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(28.dp)
         )
 
         Button(
@@ -162,7 +164,8 @@ fun SignupScreen() {
         )
 
         AuthFooter(
-            isSignup = true
+            isSignup = true,
+            onClick = onBackToLoginClick
         )
     }
 }

@@ -19,8 +19,10 @@ import com.skillbridge.app.screens.components.LogoSection
 import com.skillbridge.app.screens.components.WelcomeSection
 
 @Composable
-fun LoginScreen(onSignUpClick: ()-> Unit) {
-
+fun LoginScreen(
+    onSignUpClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit
+) {
 
     val viewModel: LoginViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -38,24 +40,29 @@ fun LoginScreen(onSignUpClick: ()-> Unit) {
 
         LogoSection()
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(
+            modifier = Modifier.height(32.dp)
+        )
 
         WelcomeSection(
             title = "The legend returns! ",
             subtitle = "Show me your hall pass."
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         LoginForm(
             email = uiState.email,
             password = uiState.password,
-            emailError =uiState.emailError,
+            emailError = uiState.emailError,
             passwordError = uiState.passwordError,
             onEmailChange = viewModel::onEmailChange,
             onPasswordChange = viewModel::onPasswordChange,
             onLoginClick = viewModel::onLoginClick,
-            onSignUpClick = onSignUpClick
+            onSignUpClick = onSignUpClick,
+            onForgotPasswordClick = onForgotPasswordClick
         )
     }
 }

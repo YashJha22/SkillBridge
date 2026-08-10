@@ -19,12 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.skillbridge.app.screens.components.LogoSection
 import com.skillbridge.app.screens.components.SkillBridgeTextField
 import com.skillbridge.app.screens.components.WelcomeSection
 
 @Composable
-fun ForgetPassword() {
+fun ForgetPassword(
+    onBackToLoginClick: () -> Unit
+) {
 
     var email by remember {
         mutableStateOf("")
@@ -44,16 +47,17 @@ fun ForgetPassword() {
         LogoSection()
 
         Spacer(
-            modifier = Modifier.height(32.dp)
+            modifier = Modifier.height(40.dp)
         )
 
         WelcomeSection(
-            title = "Misplaced your credentials, soldier?",
-            subtitle = "Enter your email to reset your password."
+            title = "Misplaced your credentials, \nsoldier?",
+            subtitle = "Enter your email to reset your password.",
+            titleFontSize = 24.sp
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(32.dp)
         )
 
         SkillBridgeTextField(
@@ -64,7 +68,7 @@ fun ForgetPassword() {
         )
 
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(32.dp)
         )
 
         Button(
@@ -81,11 +85,11 @@ fun ForgetPassword() {
         }
 
         Spacer(
-            modifier = Modifier.height(16.dp)
+            modifier = Modifier.height(8.dp)
         )
 
         TextButton(
-            onClick = { }
+            onClick = onBackToLoginClick
         ) {
             Text(
                 text = "Back to Login",

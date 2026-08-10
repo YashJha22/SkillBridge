@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -16,24 +17,29 @@ import androidx.compose.ui.unit.sp
 fun WelcomeSection(
     title: String,
     subtitle: String,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+    titleFontSize: TextUnit = 28.sp
+) {
     Column(
         modifier = modifier
-    ){
+    ) {
+
         Text(
-            text =title,
-            fontSize = 28.sp,
+            text = title,
+            fontSize = titleFontSize,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier= Modifier.height(4.dp))
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
 
         Text(
-            text =subtitle,
+            text = subtitle,
             fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant ,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.fillMaxWidth()
         )
     }

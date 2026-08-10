@@ -26,6 +26,7 @@ fun LoginForm(
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onSignUpClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -62,7 +63,7 @@ fun LoginForm(
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(
-                onClick = { }
+                onClick = onForgotPasswordClick
             ) {
                 Text(
                     text = "Forgot Password?",
