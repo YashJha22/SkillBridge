@@ -35,4 +35,47 @@ class SignupViewModel : ViewModel() {
             confirmPassword = value
         )
     }
+
+
+    fun onCreateAccountClick() {
+        val state = _uiState.value
+
+        val fullNameError = if (state.fullName.isBlank()) {
+            "Full name is required"
+        } else {
+            null
+        }
+        val emailError = if (
+            state.email.isBlank() ||
+            !android.util.Patterns.EMAIL_ADDRESS
+                .matcher(state.email)
+                .matches()
+        ) {
+            "Enter a Valid Email"
+        } else {
+            null
+        }
+        val passwordError = if (state.password.length < 8) {
+            "Password must be at least 8 characters"
+        } else {
+            null
+        }
+
+        val confirmPasswordError = if (
+            state.confirmPassword != state.password
+        ) {
+            "Passwords do not match"
+        } else {
+            null
+        }
+
+        _uiState.value = state.copy(
+            fullNameError = fullNameError,
+            emailError = emailError,
+            passwordError = passwordError,
+            confirmPasswordError = confirmPasswordError
+        )
+    }
+
 }
+

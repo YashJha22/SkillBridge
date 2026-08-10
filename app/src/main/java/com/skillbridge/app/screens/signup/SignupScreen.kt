@@ -63,7 +63,8 @@ fun SignupScreen() {
             value = uiState.fullName,
             onValueChange = viewModel::onFullNameChange,
             label = "Full Name",
-            placeholder = "Enter your full name"
+            placeholder = "Enter your full name",
+            error = uiState.fullNameError
         )
 
         Spacer(
@@ -74,7 +75,8 @@ fun SignupScreen() {
             value = uiState.email,
             onValueChange = viewModel::onEmailChange ,
             label = "Email",
-            placeholder = "you@example.com"
+            placeholder = "you@example.com",
+            error = uiState.emailError
         )
 
         Spacer(
@@ -86,7 +88,8 @@ fun SignupScreen() {
             onValueChange =viewModel::onPasswordChange,
             label = "Password",
             placeholder = "••••••••",
-            isPassword = true
+            isPassword = true,
+            error = uiState.passwordError
         )
 
         Spacer(
@@ -99,7 +102,8 @@ fun SignupScreen() {
             onValueChange =viewModel::onConfirmPasswordChange,
             label = "Confirm Password",
             placeholder = "••••••••",
-            isPassword = true
+            isPassword = true,
+            error = uiState.confirmPasswordError
         )
 
         Spacer(
@@ -107,7 +111,7 @@ fun SignupScreen() {
         )
 
         Button(
-            onClick = { },
+            onClick = zviewModel::onCreateAccountClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
