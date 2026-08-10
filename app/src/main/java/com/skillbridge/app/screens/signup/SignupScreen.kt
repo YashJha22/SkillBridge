@@ -1,7 +1,6 @@
 package com.skillbridge.app.screens.signup
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,13 +15,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skillbridge.app.screens.components.LogoSection
 import com.skillbridge.app.screens.components.SkillBridgeTextField
 import com.skillbridge.app.screens.components.SocialLoginSection
@@ -31,22 +29,8 @@ import com.skillbridge.app.screens.components.AuthFooter
 
 @Composable
 fun SignupScreen() {
-
-    var fullName by remember {
-        mutableStateOf("")
-    }
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var confirmPassword by remember {
-        mutableStateOf("")
-    }
+    val viewModel: SignupViewModel = viewModel()
+    val uiState by viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -76,8 +60,8 @@ fun SignupScreen() {
         )
 
         SkillBridgeTextField(
-            value = fullName,
-            onValueChange = { fullName = it },
+            value = uiState.fullName,
+            onValueChange = viewModel::onFullNameChange,
             label = "Full Name",
             placeholder = "Enter your full name"
         )
@@ -87,8 +71,8 @@ fun SignupScreen() {
         )
 
         SkillBridgeTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = uiState.email,
+            onValueChange = viewModel::onEmailChange ,
             label = "Email",
             placeholder = "you@example.com"
         )
@@ -98,20 +82,21 @@ fun SignupScreen() {
         )
 
         SkillBridgeTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = uiState.password,
+            onValueChange =viewModel::onPasswordChange,
             label = "Password",
             placeholder = "••••••••",
             isPassword = true
         )
 
         Spacer(
+
             modifier = Modifier.height(24.dp)
         )
 
         SkillBridgeTextField(
-            value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            value = uiState.confirmPassword,
+            onValueChange =viewModel::onConfirmPasswordChange,
             label = "Confirm Password",
             placeholder = "••••••••",
             isPassword = true
