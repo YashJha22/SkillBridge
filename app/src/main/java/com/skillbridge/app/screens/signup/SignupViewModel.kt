@@ -44,6 +44,7 @@ class SignupViewModel : ViewModel() {
     fun onSkillSelected(skill: String) {
         val currentSkills = _uiState.value.selectedSkills
 
+        // Remove skill if already selected
         if (skill in currentSkills) {
             _uiState.value = _uiState.value.copy(
                 selectedSkills = currentSkills - skill
@@ -51,16 +52,18 @@ class SignupViewModel : ViewModel() {
             return
         }
 
+        // Maximum 3 skills
         if (currentSkills.size >= 3) {
             return
         }
 
+        // Add skill
         _uiState.value = _uiState.value.copy(
             selectedSkills = currentSkills + skill
         )
     }
 
-    fun onCreateAccountClick() {
+    fun onCreateAccountClick(): Boolean {
         val state = _uiState.value
 
         val fullNameError = if (state.fullName.isBlank()) {
@@ -100,5 +103,10 @@ class SignupViewModel : ViewModel() {
             passwordError = passwordError,
             confirmPasswordError = confirmPasswordError
         )
+
+        return fullNameError == null &&
+                emailError == null &&
+                passwordError == null &&
+                confirmPasswordError == null
     }
 }

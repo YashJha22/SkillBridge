@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.skillbridge.app.screens.components.AuthFooter
 import com.skillbridge.app.screens.components.LogoSection
@@ -36,9 +35,10 @@ import com.skillbridge.app.screens.components.WelcomeSection
 
 @Composable
 fun SignupScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: SignupViewModel,
+    onContinueClick: () -> Unit
 ) {
-    val viewModel: SignupViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
 
     Box(
@@ -62,7 +62,6 @@ fun SignupScreen(
             // SkillBridge logo
             LogoSection()
 
-            // Small gap between logo and step indicator
             Spacer(
                 modifier = Modifier.height(4.dp)
             )
@@ -145,9 +144,13 @@ fun SignupScreen(
                 modifier = Modifier.height(12.dp)
             )
 
-            // Create Account
+            // Continue to Role & Skills
             Button(
-                onClick = viewModel::onCreateAccountClick,
+                onClick = {
+                    if (viewModel.onCreateAccountClick()) {
+                        onContinueClick()
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
@@ -209,8 +212,7 @@ fun SignupScreen(
             )
         }
 
-        // Back arrow
-        // Independent from the Column.
+        // Back to Login
         IconButton(
             onClick = {
                 navController.popBackStack()
