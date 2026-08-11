@@ -1,6 +1,5 @@
 package com.skillbridge.app.screens.signup
 
-
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +35,30 @@ class SignupViewModel : ViewModel() {
         )
     }
 
+    fun onRoleSelected(role: SignupRole) {
+        _uiState.value = _uiState.value.copy(
+            role = role
+        )
+    }
+
+    fun onSkillSelected(skill: String) {
+        val currentSkills = _uiState.value.selectedSkills
+
+        if (skill in currentSkills) {
+            _uiState.value = _uiState.value.copy(
+                selectedSkills = currentSkills - skill
+            )
+            return
+        }
+
+        if (currentSkills.size >= 3) {
+            return
+        }
+
+        _uiState.value = _uiState.value.copy(
+            selectedSkills = currentSkills + skill
+        )
+    }
 
     fun onCreateAccountClick() {
         val state = _uiState.value
@@ -45,6 +68,7 @@ class SignupViewModel : ViewModel() {
         } else {
             null
         }
+
         val emailError = if (
             state.email.isBlank() ||
             !android.util.Patterns.EMAIL_ADDRESS
@@ -55,6 +79,7 @@ class SignupViewModel : ViewModel() {
         } else {
             null
         }
+
         val passwordError = if (state.password.length < 8) {
             "Password must be at least 8 characters"
         } else {
@@ -76,6 +101,4 @@ class SignupViewModel : ViewModel() {
             confirmPasswordError = confirmPasswordError
         )
     }
-
 }
-

@@ -44,9 +44,7 @@ fun AppNavigation() {
 
         composable(Routes.SIGNUP) {
             SignupScreen(
-                onBackToLoginClick = {
-                    navController.popBackStack()
-                }
+                navController = navController
             )
         }
 

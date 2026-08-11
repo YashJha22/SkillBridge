@@ -1,11 +1,13 @@
 package com.skillbridge.app.screens.signup
 
-
 data class SignupUiState(
     val fullName: String = "",
     val email: String = "",
     val password: String = "",
     val confirmPassword: String = "",
+
+    val role: SignupRole? = null,
+    val selectedSkills: Set<String> = emptySet(),
 
     val fullNameError: String? = null,
     val emailError: String? = null,
