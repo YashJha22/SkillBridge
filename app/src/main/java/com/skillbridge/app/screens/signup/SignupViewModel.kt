@@ -109,4 +109,33 @@ class SignupViewModel : ViewModel() {
                 passwordError == null &&
                 confirmPasswordError == null
     }
+    fun onBioChange(value: String){
+        _uiState.value =_uiState.value.copy(
+            bio = value,
+            bioError = null
+        )
+    }
+
+    fun onGithubChange(value: String) {
+        _uiState.value = _uiState.value.copy(
+            github = value,
+        )
+    }
+    fun onPortfolioChange(value: String) {
+        _uiState.value = _uiState.value.copy(
+            portfolio = value,
+        )
+    }
+    fun onCompanyNameChange(value: String) {
+        _uiState.value = _uiState.value.copy(
+            companyName = value,
+            companyNameError = null
+        )
+    }
+    fun onHiringDescriptionChange(value: String) {
+        _uiState.value = _uiState.value.copy(
+            hiringDescription = value,
+            hiringDescriptionError = null
+        )
+    }
 }

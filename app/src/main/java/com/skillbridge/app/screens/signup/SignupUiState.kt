@@ -21,7 +21,7 @@ data class SignupUiState(
     val passwordError: String? = null,
     val confirmPasswordError: String? = null,
     val bioError: String? = null,
-    val camponyNameError: String? = null,
+    val companyNameError: String? = null,
     val hiringDescriptionError: String? = null,
 
     val isLoading: Boolean = false,
