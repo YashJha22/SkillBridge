@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.skillbridge.app.screens.components.SkillBridgeTextField
 
 @Composable
 fun ProfileScreen(
@@ -131,6 +132,16 @@ private fun EarnProfileForm(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+            Spacer(modifier = Modifier.height(28.dp)
+            )
+            SkillBridgeTextField(
+                value = uiState.bio,
+                onValueChange = viewModel::onBioChange,
+                label = "Short bio/ headline",
+                placeholder = "eg. Android developer build mobile experiences",
+                error = uiState.bioError,
+                singleLine = false
+            )
         }
     }
 }
