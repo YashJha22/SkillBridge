@@ -1,18 +1,24 @@
 package com.skillbridge.app.screens.signup
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -93,14 +99,38 @@ private fun EarnProfileForm(
             modifier = Modifier.height(20.dp)
         )
 
-        // Profile photo will go here
+        Text(
+            text ="Profile Picture",
+            style= MaterialTheme.typography.labelMedium.copy(
+                letterSpacing = 2.sp
+            ),
+              color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
-        // Bio will go here
+        Spacer (
+            modifier = Modifier.height(12.dp)
+        )
 
-        // GitHub will go here
-
-        // Portfolio will go here
-
-        // Continue button will go here
+        Surface(
+            modifier = Modifier
+                .size(96.dp)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline,
+                    shape = CircleShape
+                ),
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "+",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
     }
 }
