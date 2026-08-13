@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.skillbridge.app.screens.SplashScreen
 import com.skillbridge.app.screens.forgotPassword.ForgetPassword
 import com.skillbridge.app.screens.login.LoginScreen
+import com.skillbridge.app.screens.signup.ProfileScreen
 import com.skillbridge.app.screens.signup.RoleAndSkillsScreen
 import com.skillbridge.app.screens.signup.SignupScreen
 import com.skillbridge.app.screens.signup.SignupViewModel
@@ -42,7 +43,7 @@ fun AppNavigation() {
                     navController.navigate(Routes.SIGNUP_FLOW)
                 },
                 onForgotPasswordClick = {
-                    navController.navigate(Routes.Forgot_Password)
+                    navController.navigate(Routes.FORGOT_PASSWORD)
                 }
             )
         }
@@ -90,13 +91,38 @@ fun AppNavigation() {
                 RoleAndSkillsScreen(
                     viewModel = signupViewModel,
                     onContinueClick = {
-                        // Step 3 will be connected later.
+                        navController.navigate(
+                            Routes.PROFILE
+                        )
+                    }
+                )
+            }
+
+            composable(Routes.PROFILE) {
+
+                val signupFlowEntry = remember {
+                    navController.getBackStackEntry(
+                        Routes.SIGNUP_FLOW
+                    )
+                }
+
+                val signupViewModel: SignupViewModel = viewModel(
+                    viewModelStoreOwner = signupFlowEntry
+                )
+
+                ProfileScreen(
+                    viewModel = signupViewModel,
+                    onBackClick = {
+                        navController.popBackStack()
+                    },
+                    onContinueClick = {
+                        // Home will be connected here next.
                     }
                 )
             }
         }
 
-        composable(Routes.Forgot_Password) {
+        composable(Routes.FORGOT_PASSWORD) {
             ForgetPassword(
                 onBackToLoginClick = {
                     navController.popBackStack()

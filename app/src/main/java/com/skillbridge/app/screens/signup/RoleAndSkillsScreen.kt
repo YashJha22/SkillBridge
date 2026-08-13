@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -47,10 +46,6 @@ fun RoleAndSkillsScreen(
         "Data Entry",
         "Video Editing"
     )
-
-    val canContinue =
-        uiState.role != null &&
-                uiState.selectedSkills.size in 2..3
 
     Column(
         modifier = Modifier
@@ -145,6 +140,7 @@ fun RoleAndSkillsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
+
                     rowSkills.forEach { skill ->
 
                         SkillChip(
@@ -171,19 +167,16 @@ fun RoleAndSkillsScreen(
         )
 
         Button(
-            onClick = onContinueClick,
-            enabled = canContinue,
+            onClick = {
+                onContinueClick()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
             shape = RoundedCornerShape(18.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                disabledContainerColor =
-                    MaterialTheme.colorScheme.surfaceVariant,
-                disabledContentColor =
-                    MaterialTheme.colorScheme.onSurfaceVariant
+                contentColor = MaterialTheme.colorScheme.onPrimary
             )
         ) {
             Text(

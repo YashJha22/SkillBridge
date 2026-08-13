@@ -19,6 +19,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,6 +33,7 @@ import com.skillbridge.app.screens.components.SkillBridgeTextField
 
 @Composable
 fun ProfileScreen(
+    onBackClick: () -> Unit,
     onContinueClick: () -> Unit = {},
     viewModel: SignupViewModel = viewModel()
 ) {
@@ -43,12 +45,18 @@ fun ProfileScreen(
             EarnProfileForm(
                 viewModel = viewModel,
                 uiState = uiState,
+                onBackClick = onBackClick,
                 onContinueClick = onContinueClick
             )
         }
 
         SignupRole.HIRE -> {
-            // Company profile will be implemented next.
+            HireProfileForm(
+                viewModel = viewModel,
+                uiState = uiState,
+                onBackClick = onBackClick,
+                onContinueClick = onContinueClick
+            )
         }
 
         null -> {
@@ -61,6 +69,7 @@ fun ProfileScreen(
 private fun EarnProfileForm(
     viewModel: SignupViewModel,
     uiState: SignupUiState,
+    onBackClick: () -> Unit,
     onContinueClick: () -> Unit
 ) {
     Column(
@@ -73,6 +82,19 @@ private fun EarnProfileForm(
                 vertical = 28.dp
             )
     ) {
+
+        TextButton(
+            onClick = onBackClick
+        ) {
+            Text(
+                text = "Back",
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
 
         Text(
             text = "STEP 3 OF 3",
@@ -185,6 +207,164 @@ private fun EarnProfileForm(
         Button(
             onClick = {
                 if (viewModel.onEarnProfileContinueClick()) {
+                    onContinueClick()
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(18.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
+        ) {
+            Text(
+                text = "ENTER SKILLBRIDGE",
+                style = MaterialTheme.typography.labelLarge.copy(
+                    letterSpacing = 1.5.sp
+                )
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
+    }
+}
+
+@Composable
+private fun HireProfileForm(
+    viewModel: SignupViewModel,
+    uiState: SignupUiState,
+    onBackClick: () -> Unit,
+    onContinueClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(rememberScrollState())
+            .padding(
+                horizontal = 20.dp,
+                vertical = 28.dp
+            )
+    ) {
+
+        TextButton(
+            onClick = onBackClick
+        ) {
+            Text(
+                text = "Back",
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        Text(
+            text = "STEP 3 OF 3",
+            style = MaterialTheme.typography.labelSmall.copy(
+                letterSpacing = 2.sp
+            ),
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
+        Text(
+            text = "Profile",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.Normal
+        )
+
+        Spacer(
+            modifier = Modifier.height(32.dp)
+        )
+
+        Text(
+            text = "COMPANY PROFILE",
+            style = MaterialTheme.typography.labelMedium.copy(
+                letterSpacing = 2.sp
+            ),
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
+
+        Text(
+            text = "COMPANY LOGO",
+            style = MaterialTheme.typography.labelMedium.copy(
+                letterSpacing = 2.sp
+            ),
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
+        Surface(
+            modifier = Modifier
+                .size(96.dp)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline,
+                    shape = CircleShape
+                ),
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "+",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        Spacer(
+            modifier = Modifier.height(28.dp)
+        )
+
+        SkillBridgeTextField(
+            value = uiState.companyName,
+            onValueChange = viewModel::onCompanyNameChange,
+            label = "Company name",
+            placeholder = "e.g. SkillBridge Labs",
+            error = uiState.companyNameError
+        )
+
+        Spacer(
+            modifier = Modifier.height(28.dp)
+        )
+
+        SkillBridgeTextField(
+            value = uiState.hiringDescription,
+            onValueChange = viewModel::onHiringDescriptionChange,
+            label = "What are you hiring for?",
+            placeholder = "Tell freelancers what you need help with",
+            error = uiState.hiringDescriptionError,
+            singleLine = false
+        )
+
+        Spacer(
+            modifier = Modifier.height(36.dp)
+        )
+
+        Button(
+            onClick = {
+                if (viewModel.onHireProfileContinueClick()) {
                     onContinueClick()
                 }
             },

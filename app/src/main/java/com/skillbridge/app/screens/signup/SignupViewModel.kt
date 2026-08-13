@@ -155,4 +155,30 @@ class SignupViewModel : ViewModel() {
 
         return bioError == null
     }
+
+    fun onHireProfileContinueClick(): Boolean {
+        val state = _uiState.value
+
+        val companyNameError = if (state.companyName.isBlank()) {
+            "Company name is required"
+        } else {
+            null
+        }
+
+        val hiringDescriptionError = if (state.hiringDescription.isBlank()) {
+            "Hiring description is required"
+        } else {
+            null
+        }
+
+        _uiState.value = state.copy(
+            companyNameError = companyNameError,
+            hiringDescriptionError = hiringDescriptionError
+        )
+
+        return companyNameError == null &&
+                hiringDescriptionError == null
+    }
+
+
 }
