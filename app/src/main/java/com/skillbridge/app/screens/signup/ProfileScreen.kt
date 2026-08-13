@@ -142,6 +142,24 @@ private fun EarnProfileForm(
                 error = uiState.bioError,
                 singleLine = false
             )
+            Spacer(modifier = Modifier.height(28.dp)
+            )
+            SkillBridgeTextField(
+                value = uiState.github,
+                onValueChange = viewModel::onGithubChange,
+                label = "Github",
+                placeholder = "github.com/username"
+            )
+            Spacer(modifier = Modifier.height(28.dp)
+            )
+            SkillBridgeTextField(
+                value = uiState.portfolio,
+                onValueChange = viewModel::onPortfolioChange,
+                label = "portfolio/ past work",
+                placeholder = "Link of your work"
+            )
+
+
         }
     }
 }
