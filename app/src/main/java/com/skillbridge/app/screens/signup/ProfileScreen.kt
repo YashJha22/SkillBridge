@@ -6,12 +6,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,24 +32,27 @@ import com.skillbridge.app.screens.components.SkillBridgeTextField
 
 @Composable
 fun ProfileScreen(
+    onContinueClick: () -> Unit = {},
     viewModel: SignupViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     when (uiState.role) {
+
         SignupRole.EARN -> {
             EarnProfileForm(
                 viewModel = viewModel,
-                uiState = uiState
+                uiState = uiState,
+                onContinueClick = onContinueClick
             )
         }
 
         SignupRole.HIRE -> {
-            // Company profile
+            // Company profile will be implemented next.
         }
 
         null -> {
-            // No role selected
+            // No role selected.
         }
     }
 }
@@ -53,7 +60,8 @@ fun ProfileScreen(
 @Composable
 private fun EarnProfileForm(
     viewModel: SignupViewModel,
-    uiState: SignupUiState
+    uiState: SignupUiState,
+    onContinueClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -65,6 +73,7 @@ private fun EarnProfileForm(
                 vertical = 28.dp
             )
     ) {
+
         Text(
             text = "STEP 3 OF 3",
             style = MaterialTheme.typography.labelSmall.copy(
@@ -101,14 +110,14 @@ private fun EarnProfileForm(
         )
 
         Text(
-            text ="Profile Picture",
-            style= MaterialTheme.typography.labelMedium.copy(
+            text = "PROFILE PICTURE",
+            style = MaterialTheme.typography.labelMedium.copy(
                 letterSpacing = 2.sp
             ),
-              color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
-        Spacer (
+        Spacer(
             modifier = Modifier.height(12.dp)
         )
 
@@ -132,34 +141,72 @@ private fun EarnProfileForm(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            Spacer(modifier = Modifier.height(28.dp)
-            )
-            SkillBridgeTextField(
-                value = uiState.bio,
-                onValueChange = viewModel::onBioChange,
-                label = "Short bio/ headline",
-                placeholder = "eg. Android developer build mobile experiences",
-                error = uiState.bioError,
-                singleLine = false
-            )
-            Spacer(modifier = Modifier.height(28.dp)
-            )
-            SkillBridgeTextField(
-                value = uiState.github,
-                onValueChange = viewModel::onGithubChange,
-                label = "Github",
-                placeholder = "github.com/username"
-            )
-            Spacer(modifier = Modifier.height(28.dp)
-            )
-            SkillBridgeTextField(
-                value = uiState.portfolio,
-                onValueChange = viewModel::onPortfolioChange,
-                label = "portfolio/ past work",
-                placeholder = "Link of your work"
-            )
-
-
         }
+
+        Spacer(
+            modifier = Modifier.height(28.dp)
+        )
+
+        SkillBridgeTextField(
+            value = uiState.bio,
+            onValueChange = viewModel::onBioChange,
+            label = "Short bio / headline",
+            placeholder = "e.g. Android developer building mobile experiences",
+            error = uiState.bioError,
+            singleLine = false
+        )
+
+        Spacer(
+            modifier = Modifier.height(28.dp)
+        )
+
+        SkillBridgeTextField(
+            value = uiState.github,
+            onValueChange = viewModel::onGithubChange,
+            label = "GitHub",
+            placeholder = "github.com/username"
+        )
+
+        Spacer(
+            modifier = Modifier.height(28.dp)
+        )
+
+        SkillBridgeTextField(
+            value = uiState.portfolio,
+            onValueChange = viewModel::onPortfolioChange,
+            label = "Portfolio / past work",
+            placeholder = "Link to your work"
+        )
+
+        Spacer(
+            modifier = Modifier.height(36.dp)
+        )
+
+        Button(
+            onClick = {
+                if (viewModel.onEarnProfileContinueClick()) {
+                    onContinueClick()
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(18.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
+        ) {
+            Text(
+                text = "ENTER SKILLBRIDGE",
+                style = MaterialTheme.typography.labelLarge.copy(
+                    letterSpacing = 1.5.sp
+                )
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
     }
 }

@@ -44,7 +44,6 @@ class SignupViewModel : ViewModel() {
     fun onSkillSelected(skill: String) {
         val currentSkills = _uiState.value.selectedSkills
 
-        // Remove skill if already selected
         if (skill in currentSkills) {
             _uiState.value = _uiState.value.copy(
                 selectedSkills = currentSkills - skill
@@ -52,12 +51,10 @@ class SignupViewModel : ViewModel() {
             return
         }
 
-        // Maximum 3 skills
         if (currentSkills.size >= 3) {
             return
         }
 
-        // Add skill
         _uiState.value = _uiState.value.copy(
             selectedSkills = currentSkills + skill
         )
@@ -109,8 +106,9 @@ class SignupViewModel : ViewModel() {
                 passwordError == null &&
                 confirmPasswordError == null
     }
-    fun onBioChange(value: String){
-        _uiState.value =_uiState.value.copy(
+
+    fun onBioChange(value: String) {
+        _uiState.value = _uiState.value.copy(
             bio = value,
             bioError = null
         )
@@ -118,24 +116,43 @@ class SignupViewModel : ViewModel() {
 
     fun onGithubChange(value: String) {
         _uiState.value = _uiState.value.copy(
-            github = value,
+            github = value
         )
     }
+
     fun onPortfolioChange(value: String) {
         _uiState.value = _uiState.value.copy(
-            portfolio = value,
+            portfolio = value
         )
     }
+
     fun onCompanyNameChange(value: String) {
         _uiState.value = _uiState.value.copy(
             companyName = value,
             companyNameError = null
         )
     }
+
     fun onHiringDescriptionChange(value: String) {
         _uiState.value = _uiState.value.copy(
             hiringDescription = value,
             hiringDescriptionError = null
         )
+    }
+
+    fun onEarnProfileContinueClick(): Boolean {
+        val state = _uiState.value
+
+        val bioError = if (state.bio.isBlank()) {
+            "Bio / headline is required"
+        } else {
+            null
+        }
+
+        _uiState.value = state.copy(
+            bioError = bioError
+        )
+
+        return bioError == null
     }
 }
