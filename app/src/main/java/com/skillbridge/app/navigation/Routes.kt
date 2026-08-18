@@ -3,6 +3,7 @@ package com.skillbridge.app.navigation
 object Routes {
     const val SPLASH = "splash"
     const val LOGIN = "login"
+    const val HOME = "home"
 
     const val SIGNUP_FLOW = "signup_flow"
     const val SIGNUP = "signup"

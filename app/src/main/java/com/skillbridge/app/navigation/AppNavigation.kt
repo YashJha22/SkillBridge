@@ -9,6 +9,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.skillbridge.app.screens.SplashScreen
 import com.skillbridge.app.screens.forgotPassword.ForgetPassword
+import com.skillbridge.app.screens.home.HomeScreen
 import com.skillbridge.app.screens.login.LoginScreen
 import com.skillbridge.app.screens.signup.ProfileScreen
 import com.skillbridge.app.screens.signup.RoleAndSkillsScreen
@@ -116,10 +117,18 @@ fun AppNavigation() {
                         navController.popBackStack()
                     },
                     onContinueClick = {
-                        // Home will be connected here next.
+                        navController.navigate(Routes.HOME) {
+                            popUpTo(Routes.SIGNUP_FLOW) {
+                                inclusive = true
+                            }
+                        }
                     }
                 )
             }
+        }
+
+        composable(Routes.HOME) {
+            HomeScreen()
         }
 
         composable(Routes.FORGOT_PASSWORD) {
