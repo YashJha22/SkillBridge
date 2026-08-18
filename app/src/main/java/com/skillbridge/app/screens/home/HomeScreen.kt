@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.skillbridge.app.screens.home.components.HomeHeader
+import com.skillbridge.app.screens.home.components.MilestoneRail
 import com.skillbridge.app.ui.theme.Background
 
 @Composable
@@ -22,6 +23,13 @@ fun HomeScreen(
     ){
         HomeHeader(
             userName = uiState.user.name
+        )
+
+        MilestoneRail(
+            learnProgress = uiState.bridge.learnProgress,
+            earnProgress = uiState.bridge.earnProgress,
+            investProgress = uiState.bridge.investProgress,
+            modifier = Modifier.padding(top = 28.dp)
         )
     }
 }
