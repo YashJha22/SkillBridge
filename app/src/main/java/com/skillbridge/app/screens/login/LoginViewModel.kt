@@ -13,20 +13,24 @@ class LoginViewModel : ViewModel() {
 
     fun onEmailChange(email: String) {
         _uiState.update {
-            it.copy(email = email,
+            it.copy(
+                email = email,
                 emailError = null
-                )
+            )
         }
     }
 
     fun onPasswordChange(password: String) {
         _uiState.update {
-            it.copy(password = password,
+            it.copy(
+                password = password,
                 passwordError = null
-                )
+            )
         }
     }
+
     fun onLoginClick() {
+
         if (_uiState.value.email.isBlank()) {
             _uiState.update {
                 it.copy(
@@ -35,14 +39,30 @@ class LoginViewModel : ViewModel() {
             }
             return
         }
-        if(_uiState.value.password.isBlank()){
+
+        if (_uiState.value.password.isBlank()) {
             _uiState.update {
                 it.copy(
-                    passwordError = "Password is  required"
+                    passwordError = "Password is required"
                 )
             }
             return
         }
+
+        // Temporary UI-only login success.
+        // Real authentication will be added with Supabase later.
+        _uiState.update {
+            it.copy(
+                isLoginSuccessful = true
+            )
+        }
     }
 
+    fun clearLoginSuccess() {
+        _uiState.update {
+            it.copy(
+                isLoginSuccessful = false
+            )
+        }
+    }
 }

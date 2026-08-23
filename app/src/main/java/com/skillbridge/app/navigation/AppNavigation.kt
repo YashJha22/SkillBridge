@@ -40,6 +40,13 @@ fun AppNavigation() {
 
         composable(Routes.LOGIN) {
             LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(Routes.HOME) {
+                        popUpTo(Routes.LOGIN) {
+                            inclusive = true
+                        }
+                    }
+                },
                 onSignUpClick = {
                     navController.navigate(Routes.SIGNUP_FLOW)
                 },

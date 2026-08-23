@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -20,12 +21,20 @@ import com.skillbridge.app.screens.components.WelcomeSection
 
 @Composable
 fun LoginScreen(
+    onLoginSuccess: () -> Unit,
     onSignUpClick: () -> Unit,
     onForgotPasswordClick: () -> Unit
 ) {
 
     val viewModel: LoginViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState.isLoginSuccessful) {
+        if (uiState.isLoginSuccessful) {
+            viewModel.clearLoginSuccess()
+            onLoginSuccess()
+        }
+    }
 
     Column(
         modifier = Modifier
