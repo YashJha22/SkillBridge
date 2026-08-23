@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.skillbridge.app.screens.home.components.ActiveContract
+import com.skillbridge.app.screens.home.components.CurrentLearning
 import com.skillbridge.app.screens.home.components.HomeHeader
 import com.skillbridge.app.screens.home.components.HomeStats
 import com.skillbridge.app.screens.home.components.MilestoneRail
@@ -46,6 +47,13 @@ fun HomeScreen(
             completedTasks = uiState.activeContract.completedTasks,
             totalTasks = uiState.activeContract.totalTasks,
             progress = uiState.activeContract.progress,
+            modifier = Modifier.padding(top = 32.dp)
+        )
+
+        CurrentLearning(
+            title = uiState.currentLearning.title,
+            currentLesson = uiState.currentLearning.currentLesson,
+            totalLessons = uiState.currentLearning.totalLessons,
             modifier = Modifier.padding(top = 32.dp)
         )
     }
